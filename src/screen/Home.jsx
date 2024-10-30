@@ -1,7 +1,10 @@
 import { HiHome, HiHeart } from "react-icons/hi";
 import { FaShoppingCart } from "react-icons/fa";
+import usePizzas from "../hooks/usePizzas";
 
 const Home = () => {
+  const { pizzas } = usePizzas();
+
   return (
     <main>
       <aside>
@@ -48,21 +51,14 @@ const Home = () => {
         <section className="pizzas-feed">
           <h2>Our Signatures</h2>
           <div>
-            {new Array(10).fill("").map((_, i) => {
+            {pizzas.map((pizza, i) => {
               return (
                 <div className="pizza-card" key={i}>
-                  <img
-                    src="/public/pizzas/napolitana.webp"
-                    width={200}
-                    height={200}
-                  />
+                  <img src={pizza.image} width={200} height={200} />
 
                   <div>
-                    <h5>The Barbecue Chicken Pizza</h5>
-                    <p className="text-sm">
-                      Barbecued Chicken, Red Peppers, Green Peppers, Tomatoes,
-                      Red Onions, Barbecue Sauce
-                    </p>
+                    <h5>{pizza.name}</h5>
+                    <p className="text-sm">{pizza.description}</p>
                   </div>
                 </div>
               );
