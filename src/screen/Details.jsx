@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const Details = () => {
   const [qt, setQt] = useState(1);
-  const [pizzaSize, setPizzaSize] = useState("M");
+  const [pizzaSize, setPizzaSize] = useState("S");
 
   return (
     <main>
