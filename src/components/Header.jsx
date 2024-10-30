@@ -6,8 +6,6 @@ export default function Header() {
   const router = useRouterState();
   const pathname = router.location.pathname;
 
-  console.log(pathname === "/favorites");
-
   return (
     <>
       <aside>

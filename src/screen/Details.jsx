@@ -1,28 +1,36 @@
 import { HiHome, HiHeart } from "react-icons/hi";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getPizza } from "../api/get-pizza";
 
-const Details = () => {
+const Details = ({ id }) => {
   const [qt, setQt] = useState(1);
   const [pizzaSize, setPizzaSize] = useState("S");
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["pizza", id],
+    queryFn: () => getPizza(id),
+    staleTime: 1000 * 60 * 60,
+  });
+
+  if (isLoading) {
+    return <></>;
+  }
 
   return (
     <div>
       <section className="pizza-details">
-        <h2>The Barbecue Chicken Pizza</h2>
+        <h2>{data.name}</h2>
         <div>
-          <img
-            src="/public/pizzas/bbq_ckn.webp"
-            alt=""
-            width={500}
-            height={500}
-          />
+          <img src={data.image} alt={data.name} width={500} height={500} />
           <div>
-            <p>
-              Barbecued Chicken, Red Peppers, Green Peppers, Tomatoes, Red
-              Onions, Barbecue Sauce
-            </p>
-            <form>
+            <p>{data.description}</p>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
               <div style={{ border: "none", display: "flex", paddingLeft: 0 }}>
                 <span>
                   <input
@@ -85,7 +93,9 @@ const Details = () => {
                   +
                 </button>
               </span>
-              <span style={{ display: "flex", gap: ".5rem" }}>
+              <span
+                style={{ display: "flex", gap: ".5rem", marginTop: "1rem" }}
+              >
                 <button
                   class="love-red-btn"
                   style={{
@@ -102,7 +112,7 @@ const Details = () => {
                   type="submit"
                   style={{ display: "flex", marginTop: "1rem" }}
                 >
-                  Add to cart
+                  Add to cart - ${parseInt(data.sizes[pizzaSize]) * qt}
                 </button>
               </span>
             </form>

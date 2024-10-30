@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getPizzas } from "../api/get-pizzas";
 
 const usePizzas = () => {
   const [loading, setLoading] = useState(false);
@@ -7,8 +8,7 @@ const usePizzas = () => {
   useEffect(() => {
     const fetchPizzas = async () => {
       setLoading(true);
-      const res = await fetch("/api/pizzas");
-      const pizzas = await res.json();
+      const pizzas = await getPizzas();
       setPizzas(pizzas);
     };
 
