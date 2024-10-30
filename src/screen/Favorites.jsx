@@ -1,9 +1,9 @@
-import { Link } from "@tanstack/react-router";
 import PizzaCard from "../components/PizzaCard";
-import usePizzas from "../hooks/usePizzas";
+import { useFavorites } from "../stores/favorites";
 
 export default function Favorites() {
-  const { pizzas } = usePizzas();
+  const { pizzas } = useFavorites();
+
   return (
     <div>
       <h1
@@ -15,9 +15,14 @@ export default function Favorites() {
         Favorites
       </h1>
 
+      <p>
+        {Object.values(pizzas).length === 0 && (
+          <>You don't have any favorites yet</>
+        )}
+      </p>
       <section className="pizzas-feed">
         <div>
-          {pizzas.map((pizza, i) => {
+          {Object.values(pizzas).map((pizza, i) => {
             return <PizzaCard key={i} pizza={pizza} />;
           })}
         </div>

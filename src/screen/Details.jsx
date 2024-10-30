@@ -1,8 +1,10 @@
 import { HiHome, HiHeart } from "react-icons/hi";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getPizza } from "../api/get-pizza";
+import { useCart } from "../stores/cart";
+import { useFavorites } from "../stores/favorites";
 
 const Details = ({ id }) => {
   const [qt, setQt] = useState(1);
@@ -13,6 +15,15 @@ const Details = ({ id }) => {
     queryFn: () => getPizza(id),
     staleTime: 1000 * 60 * 60,
   });
+
+  const { pizzas, addToCart } = useCart();
+
+  const { pizzas: favPizzas, toggleFav } = useFavorites();
+
+  const pizzaUid = useMemo(
+    () => (!data ? "" : `${data.id} (${pizzaSize})`),
+    [data, pizzaSize],
+  );
 
   if (isLoading) {
     return <></>;
@@ -29,6 +40,12 @@ const Details = ({ id }) => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                addToCart({
+                  ...data,
+                  uid: pizzaUid,
+                  size: pizzaSize,
+                  qt,
+                });
               }}
             >
               <div style={{ border: "none", display: "flex", paddingLeft: 0 }}>
@@ -102,9 +119,12 @@ const Details = ({ id }) => {
                     display: "flex",
                     marginTop: "1rem",
                     alignItems: "center",
-                    backgroundColor: "inherit",
+                    ...(!favPizzas[data.id]
+                      ? { backgroundColor: "inherit" }
+                      : {}),
                   }}
                   type="button"
+                  onClick={() => toggleFav(data)}
                 >
                   <FaHeart />
                 </button>
@@ -112,6 +132,17 @@ const Details = ({ id }) => {
                   type="submit"
                   style={{ display: "flex", marginTop: "1rem" }}
                 >
+                  {pizzas[pizzaUid] && (
+                    <span
+                      style={{
+                        color: "var(--secondary)",
+                        marginRight: "0.5rem",
+                        fontWeight: "bolder",
+                      }}
+                    >
+                      ✔{" "}
+                    </span>
+                  )}
                   Add to cart - ${parseInt(data.sizes[pizzaSize]) * qt}
                 </button>
               </span>
