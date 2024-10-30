@@ -1,14 +1,17 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import Home from "./screen/Home";
-import Details from "./screen/Details";
+import React, { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
 
-const rootRef = document.querySelector("#root");
-const root = createRoot(rootRef);
+import { routeTree } from "./routeTree.gen";
 
-const App = () => <Details />;
-{
-  /* <Home />; */
+const router = createRouter({ routeTree });
+
+const rootElement = document.getElementById("root");
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  );
 }
-
-root.render(<App />);
