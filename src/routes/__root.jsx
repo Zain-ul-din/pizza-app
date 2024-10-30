@@ -25,8 +25,8 @@ const Component = () => {
         <Header />
         <Outlet />
       </main>
-      <ReactQueryDevtools />
-      <TanStackRouterDevtools />
+      {/* <ReactQueryDevtools /> */}
+      {/* <TanStackRouterDevtools /> */}
     </>
   );
 };
