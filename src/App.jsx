@@ -7,7 +7,6 @@ const rootRef = document.querySelector("#root");
 const root = createRoot(rootRef);
 
 const App = () => <Details />;
-
 {
   /* <Home />; */
 }
