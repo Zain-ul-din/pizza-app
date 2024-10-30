@@ -16,22 +16,36 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
-const PizzaLazyImport = createFileRoute('/pizza')()
+const FavoritesLazyImport = createFileRoute('/favorites')()
+const CartLazyImport = createFileRoute('/cart')()
 const IndexLazyImport = createFileRoute('/')()
+const PizzaIdLazyImport = createFileRoute('/pizza/$id')()
 
 // Create/Update Routes
 
-const PizzaLazyRoute = PizzaLazyImport.update({
-  id: '/pizza',
-  path: '/pizza',
+const FavoritesLazyRoute = FavoritesLazyImport.update({
+  id: '/favorites',
+  path: '/favorites',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/pizza.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/favorites.lazy').then((d) => d.Route))
+
+const CartLazyRoute = CartLazyImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/cart.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const PizzaIdLazyRoute = PizzaIdLazyImport.update({
+  id: '/pizza/$id',
+  path: '/pizza/$id',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/pizza/$id.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
@@ -44,11 +58,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/pizza': {
-      id: '/pizza'
-      path: '/pizza'
-      fullPath: '/pizza'
-      preLoaderRoute: typeof PizzaLazyImport
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/pizza/$id': {
+      id: '/pizza/$id'
+      path: '/pizza/$id'
+      fullPath: '/pizza/$id'
+      preLoaderRoute: typeof PizzaIdLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -58,37 +86,47 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
-  '/pizza': typeof PizzaLazyRoute
+  '/cart': typeof CartLazyRoute
+  '/favorites': typeof FavoritesLazyRoute
+  '/pizza/$id': typeof PizzaIdLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
-  '/pizza': typeof PizzaLazyRoute
+  '/cart': typeof CartLazyRoute
+  '/favorites': typeof FavoritesLazyRoute
+  '/pizza/$id': typeof PizzaIdLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
-  '/pizza': typeof PizzaLazyRoute
+  '/cart': typeof CartLazyRoute
+  '/favorites': typeof FavoritesLazyRoute
+  '/pizza/$id': typeof PizzaIdLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/pizza'
+  fullPaths: '/' | '/cart' | '/favorites' | '/pizza/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/pizza'
-  id: '__root__' | '/' | '/pizza'
+  to: '/' | '/cart' | '/favorites' | '/pizza/$id'
+  id: '__root__' | '/' | '/cart' | '/favorites' | '/pizza/$id'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
-  PizzaLazyRoute: typeof PizzaLazyRoute
+  CartLazyRoute: typeof CartLazyRoute
+  FavoritesLazyRoute: typeof FavoritesLazyRoute
+  PizzaIdLazyRoute: typeof PizzaIdLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  PizzaLazyRoute: PizzaLazyRoute,
+  CartLazyRoute: CartLazyRoute,
+  FavoritesLazyRoute: FavoritesLazyRoute,
+  PizzaIdLazyRoute: PizzaIdLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -104,14 +142,22 @@ export const routeTree = rootRoute
       "filePath": "__root.jsx",
       "children": [
         "/",
-        "/pizza"
+        "/cart",
+        "/favorites",
+        "/pizza/$id"
       ]
     },
     "/": {
       "filePath": "index.lazy.jsx"
     },
-    "/pizza": {
-      "filePath": "pizza.lazy.jsx"
+    "/cart": {
+      "filePath": "cart.lazy.jsx"
+    },
+    "/favorites": {
+      "filePath": "favorites.lazy.jsx"
+    },
+    "/pizza/$id": {
+      "filePath": "pizza/$id.lazy.jsx"
     }
   }
 }

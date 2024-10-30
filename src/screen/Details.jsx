@@ -1,5 +1,5 @@
 import { HiHome, HiHeart } from "react-icons/hi";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { useState } from "react";
 
 const Details = () => {
@@ -85,12 +85,26 @@ const Details = () => {
                   +
                 </button>
               </span>
-              <button
-                type="submit"
-                style={{ display: "flex", marginTop: "1rem" }}
-              >
-                Add to cart
-              </button>
+              <span style={{ display: "flex", gap: ".5rem" }}>
+                <button
+                  class="love-red-btn"
+                  style={{
+                    display: "flex",
+                    marginTop: "1rem",
+                    alignItems: "center",
+                    backgroundColor: "inherit",
+                  }}
+                  type="button"
+                >
+                  <FaHeart />
+                </button>
+                <button
+                  type="submit"
+                  style={{ display: "flex", marginTop: "1rem" }}
+                >
+                  Add to cart
+                </button>
+              </span>
             </form>
           </div>
         </div>

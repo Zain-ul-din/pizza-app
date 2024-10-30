@@ -1,19 +1,35 @@
 import { HiHome, HiHeart } from "react-icons/hi";
 import { FaShoppingCart } from "react-icons/fa";
+import { Link, useRouterState } from "@tanstack/react-router";
 
 export default function Header() {
+  const router = useRouterState();
+  const pathname = router.location.pathname;
+
+  console.log(pathname === "/favorites");
+
   return (
     <>
       <aside>
         <ul>
           <li>
-            <HiHome />
+            <Link to={"/"}>
+              <HiHome className={pathname === "/" ? "active-icon" : ""} />
+            </Link>
           </li>
           <li>
-            <HiHeart />
+            <Link to={"/favorites"}>
+              <HiHeart
+                className={pathname === "/favorites" ? "active-icon" : ""}
+              />
+            </Link>
           </li>
           <li>
-            <FaShoppingCart />
+            <Link to={"/cart"}>
+              <FaShoppingCart
+                className={pathname === "/cart" ? "active-icon" : ""}
+              />
+            </Link>
           </li>
         </ul>
       </aside>

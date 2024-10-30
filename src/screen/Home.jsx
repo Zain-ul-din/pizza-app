@@ -1,5 +1,5 @@
 import usePizzas from "../hooks/usePizzas";
-
+import PizzaCard from "../components/PizzaCard";
 const Home = () => {
   const { pizzas } = usePizzas();
 
@@ -31,16 +31,7 @@ const Home = () => {
         <h2>Our Signatures</h2>
         <div>
           {pizzas.map((pizza, i) => {
-            return (
-              <div className="pizza-card" key={i}>
-                <img src={pizza.image} width={200} height={200} />
-
-                <div>
-                  <h5>{pizza.name}</h5>
-                  <p className="text-sm">{pizza.description}</p>
-                </div>
-              </div>
-            );
+            return <PizzaCard key={i} pizza={pizza} />;
           })}
         </div>
       </section>
