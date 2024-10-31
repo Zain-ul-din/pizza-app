@@ -48,6 +48,29 @@ main > aside > ul {
   gap: 4rem;
 }
 
+main > aside > ul > li {
+  position: relative;
+}
+
+main > aside > ul > li > .rounded-svg {
+  fill: var(--primary);
+  position: absolute;
+  right: -1.8rem;
+  top: -50%;
+  animation: scale-up 0.25s linear;
+  transform-origin: left center;
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scaleX(0);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}
+
 main > aside > ul > li > a > svg {
   width: 30px;
   height: 30px;
@@ -96,6 +119,10 @@ main > div {
 @media (max-width: 600px) {
   main > div {
     padding: 1rem;
+  }
+
+  main > aside > ul > li > .rounded-svg {
+    display: none;
   }
 
   main > aside {

@@ -27,12 +27,12 @@ export default function Cart() {
                 <div>
                   <Link to={`/pizza/${pizza.id}`}>
                     <h4>
-                      {pizza.name}{" "}
+                      {pizza.name} ({pizza.size})
                       <FaExternalLinkAlt
                         style={{
                           width: "1rem",
                           height: "1rem",
-                          marginLeft: "0.2rem",
+                          marginLeft: "0.4rem",
                         }}
                       />
                     </h4>
