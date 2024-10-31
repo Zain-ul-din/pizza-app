@@ -57,13 +57,13 @@ main > aside > ul > li > .rounded-svg {
   position: absolute;
   right: -1.8rem;
   top: -50%;
-  animation: scale-up 0.25s linear;
+  animation: scale-up 0.3s;
   transform-origin: left center;
 }
 
 @keyframes scale-up {
   0% {
-    transform: scaleX(0);
+    transform: scaleX(0.1);
   }
 
   100% {

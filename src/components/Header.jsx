@@ -54,7 +54,7 @@ export default function Header() {
 const RightSideBorder = () => {
   return (
     <svg
-      width="9"
+      width="10"
       height="64"
       viewBox="0 0 9 64"
       xmlns="http://www.w3.org/2000/svg"
