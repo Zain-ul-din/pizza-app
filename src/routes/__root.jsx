@@ -21,7 +21,14 @@ const Component = () => {
 
   return (
     <>
+      <div className="overlay">
+        {["200ms", "250ms", "300ms", "350ms", "400ms", "450ms"].map((v, i) => {
+          return <div key={i} style={{ "--delay": v }}></div>;
+        })}
+      </div>
+
       <main>
+        {/* overlay */}
         <Header />
         <Outlet />
       </main>

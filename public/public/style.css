@@ -29,6 +29,34 @@ body {
 main {
   height: 100svh;
   display: flex;
+  position: relative;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 9999;
+  width: 100vw;
+  height: 100svh;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.overlay > div {
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  transform-origin: bottom right;
+  animation: scale_x 300ms ease-out var(--delay) forwards;
+}
+
+@keyframes scale_x {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
 }
 
 main > aside {
