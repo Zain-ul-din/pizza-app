@@ -47,6 +47,7 @@ const Home = () => {
                   src="public/pizzas/pizza-png.png"
                   width={120}
                   height={120}
+                  alt={`pizza-offer`}
                 />
               </div>
             </Link>
@@ -61,7 +62,7 @@ const Home = () => {
         <p>{filterPizzas.length === 0 && "No results found"}</p>
         <div>
           {filterPizzas.map((pizza, i) => {
-            return <PizzaCard key={i} pizza={pizza} />;
+            return <PizzaCard key={i} pizza={pizza} loadLazy={i > 5} />;
           })}
         </div>
       </section>
