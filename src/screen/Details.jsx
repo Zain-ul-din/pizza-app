@@ -114,7 +114,7 @@ const Details = ({ id }) => {
                 style={{ display: "flex", gap: ".5rem", marginTop: "1rem" }}
               >
                 <button
-                  class="love-red-btn"
+                  className="love-red-btn"
                   style={{
                     display: "flex",
                     marginTop: "1rem",

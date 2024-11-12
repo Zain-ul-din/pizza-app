@@ -20,7 +20,17 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Crimes with the Pizza</h1>
+      <h2>
+        <img
+          src="/public/logo_svg.svg"
+          alt="logo"
+          style={{
+            marginRight: "0.5rem",
+            transform: "TranslateY(5px)",
+          }}
+        />
+        Pizzaroo
+      </h2>
 
       <input
         placeholder="Search Pizzas"
