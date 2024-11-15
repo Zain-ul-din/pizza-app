@@ -91,8 +91,16 @@ export default function Cart() {
             Total - ${total}
           </h3>
 
-          <Link to={"https://www.stripe.com"}>
-            <button style={{ marginTop: "1rem" }}>Pay on stripe</button>
+          <Link
+            to={"https://www.stripe.com"}
+            aria-disabled={total === 0 ? "true" : "false"}
+          >
+            <button
+              style={{ marginTop: "1rem" }}
+              aria-disabled={total === 0 ? "true" : "false"}
+            >
+              Pay on stripe
+            </button>
           </Link>
         </div>
       </section>
